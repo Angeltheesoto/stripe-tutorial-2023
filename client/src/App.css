@@ -1,0 +1,27 @@
+:root {
+  --color-one: black;
+  --color-btn-primary: rgb(209, 86, 86);
+  --color-body: white;
+}
+
+html {
+  background-color: var(--color-body) !important;
+}
+
+body {
+  background-color: var(--color-body) !important;
+}
+
+p {
+  font-weight: 600;
+}
+
+.app-btn {
+  border: none;
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 20px;
+  color: gray;
+  background-color: var(--color-btn-primary);
+  color: white;
+}
