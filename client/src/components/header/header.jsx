@@ -25,7 +25,7 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav" className="navbar-drpdwn">
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}> HOME</Nav.Link>
-            <Nav.Link onClick={() => navigate("/plans")}>PLANS</Nav.Link>
+            {/* <Nav.Link onClick={() => navigate("/plans")}>PLANS</Nav.Link> */}
           </Nav>
           <Nav className="justify-content-end align-items-center "></Nav>
           <Nav className="justify-content-end align-items-center ">

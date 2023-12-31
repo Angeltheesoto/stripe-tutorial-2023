@@ -31,3 +31,10 @@
     transition: 0.3s ease-in;
   }
 }
+
+@media screen and (max-width: 766px) {
+  .card-container {
+    // border: 1px solid red;
+    justify-content: space-around;
+  }
+}

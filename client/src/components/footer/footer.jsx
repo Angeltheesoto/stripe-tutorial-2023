@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer>
       <hr />
-      Copyright &copy; {year} | stripe_tutorial. All Rights Reserved.{" "}
+      Copyright &copy; {year} | Made with ❤️ by MunchiezCo. All Rights Reserved.{" "}
     </footer>
   );
 };
