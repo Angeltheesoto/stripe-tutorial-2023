@@ -24,7 +24,9 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="navbar-drpdwn">
           <Nav className="me-auto">
-            <Nav.Link onClick={() => navigate("/")}> HOME</Nav.Link>
+            <Nav.Link onClick={() => navigate("/")}> Home</Nav.Link>
+            <Nav.Link onClick={() => navigate("/")}> Products</Nav.Link>
+            <Nav.Link onClick={() => navigate("/")}> About</Nav.Link>
             {/* <Nav.Link onClick={() => navigate("/plans")}>PLANS</Nav.Link> */}
           </Nav>
           <Nav className="justify-content-end align-items-center "></Nav>
