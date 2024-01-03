@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./card.styles.scss";
+import { dataContext } from "../../context/dataContext";
 
 const Card = ({ products }) => {
+  const { cart, setCart } = useContext(dataContext);
+
   const [chooseSize, setChooseSize] = useState(false);
   const [chosenItem, setChosenItem] = useState("");
   const [chosenSize, setChosenSize] = useState("small");
@@ -16,6 +19,47 @@ const Card = ({ products }) => {
     setChosenItem("");
     setChooseSize(false);
   };
+
+  const handleAddToCart = () => {
+    /*
+      {
+        title: Burger shirt | black,
+        size: small,
+        quantity: 1
+      },
+      {
+        title: Burger shirt | white,
+        size: large,
+        quantity: 3
+      }
+    */
+    //  check if item exists in cart.
+    // if item title and size are in cart
+    //      then increment quantity by 1
+    // else
+    //      append item in cart
+    let searchTitle = chosenItem.title;
+    let searchSize = chosenSize;
+    let itemExists = false;
+
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].title === searchTitle && cart[i].size === searchSize) {
+        cart[i].quantity = cart[i].quantity + 1;
+        itemExists = true;
+        break;
+      }
+    }
+
+    if (!itemExists) {
+      setCart((prev) => [
+        ...prev,
+        { title: searchTitle, size: searchSize, quantity: 1 },
+      ]);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    // console.log(itemExists);
+  };
+  // console.log(cart);
 
   return (
     <div className="card-container">
@@ -85,7 +129,9 @@ const Card = ({ products }) => {
               >
                 Go back
               </button>
-              <button className="app-btn">Add to cart</button>
+              <button className="app-btn" onClick={() => handleAddToCart()}>
+                Add to cart
+              </button>
             </div>
           </div>
         </div>

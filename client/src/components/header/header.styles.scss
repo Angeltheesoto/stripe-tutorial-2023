@@ -32,6 +32,10 @@
   box-shadow: 2px 3px 10px 1px #1e1e1e;
 }
 
+.header-cart:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 575px) {
   .navbar-nav {
     width: 100%;

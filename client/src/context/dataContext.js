@@ -41,8 +41,16 @@ export const DataContextProvider = ({ children }) => {
       desc: "Short Sleeve 100% Cotton T-Shirt with Cute picture.",
     },
   ]);
+  const [cart, setCart] = useState([]);
+
+  // ?Check if the items exists in localstorage
+  if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
   return (
-    <dataContext.Provider value={{ data }}>{children}</dataContext.Provider>
+    <dataContext.Provider value={{ data, cart, setCart }}>
+      {children}
+    </dataContext.Provider>
   );
 };

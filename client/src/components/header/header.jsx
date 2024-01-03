@@ -31,7 +31,12 @@ function Header() {
           </Nav>
           <Nav className="justify-content-end align-items-center "></Nav>
           <Nav className="justify-content-end align-items-center ">
-            <Bag color="white" size="30px" />
+            <Bag
+              color="white"
+              size="30px"
+              className="header-cart"
+              onClick={() => navigate("/cart")}
+            />
           </Nav>
         </Navbar.Collapse>
       </Container>

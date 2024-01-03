@@ -15,6 +15,15 @@ body {
   background-color: var(--color-body) !important;
 }
 
+nav {
+  /* border: 1px solid red; */
+  position: sticky !important;
+  top: 10px;
+  border-radius: 50px;
+  margin: 0 1rem;
+  overflow: hidden;
+}
+
 p {
   font-weight: 600;
 }
