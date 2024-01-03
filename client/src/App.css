@@ -16,7 +16,6 @@ body {
 }
 
 nav {
-  /* border: 1px solid red; */
   position: sticky !important;
   top: 10px;
   border-radius: 50px;
@@ -75,4 +74,8 @@ p {
 .app-size-btn-checked:hover {
   color: var(--color-body);
   background-color: skyblue;
+}
+
+.app-price {
+  font-weight: bolder;
 }

@@ -1,11 +1,9 @@
 .card-container {
-  //   border: 1px solid green;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 7rem;
   .card-item-container {
-    // border: 1px solid gray;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -35,17 +33,14 @@
 
 @media screen and (max-width: 766px) {
   .card-container {
-    // border: 1px solid red;
     justify-content: space-around;
   }
 }
 
 .card-size-container {
-  // border: 1px solid red;
   display: flex;
 
   .card-image {
-    // border: 1px solid green;
     width: 50%;
   }
   .card-size-subcontainer {
@@ -55,7 +50,6 @@
     justify-content: center;
     align-items: center;
     .card-size-btn-container {
-      // border: 1px solid red;
       width: 10rem;
       margin: 1rem 0;
     }

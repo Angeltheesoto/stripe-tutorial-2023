@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./card.styles.scss";
 import { dataContext } from "../../context/dataContext";
 
@@ -10,7 +10,7 @@ const Card = ({ products }) => {
   const [chosenSize, setChosenSize] = useState("small");
 
   const handleClick = (item) => {
-    console.log(`Product: ${item.image}`);
+    // console.log(`Product: ${item.image}`);
     setChosenItem(item);
     setChooseSize(true);
   };
@@ -20,24 +20,7 @@ const Card = ({ products }) => {
     setChooseSize(false);
   };
 
-  const handleAddToCart = () => {
-    /*
-      {
-        title: Burger shirt | black,
-        size: small,
-        quantity: 1
-      },
-      {
-        title: Burger shirt | white,
-        size: large,
-        quantity: 3
-      }
-    */
-    //  check if item exists in cart.
-    // if item title and size are in cart
-    //      then increment quantity by 1
-    // else
-    //      append item in cart
+  const handleAddToCart = (item) => {
     let searchTitle = chosenItem.title;
     let searchSize = chosenSize;
     let itemExists = false;
@@ -53,7 +36,13 @@ const Card = ({ products }) => {
     if (!itemExists) {
       setCart((prev) => [
         ...prev,
-        { title: searchTitle, size: searchSize, quantity: 1 },
+        {
+          title: searchTitle,
+          size: searchSize,
+          quantity: 1,
+          image: item.image,
+          price: item.price,
+        },
       ]);
     }
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -89,6 +78,7 @@ const Card = ({ products }) => {
             <div>
               <h2>{chosenItem?.title}</h2>
               <p>{chosenItem?.desc}</p>
+              <span className="app-price">${chosenItem?.price}</span>
             </div>
             <div className="card-size-btn-container">
               <p
@@ -129,7 +119,15 @@ const Card = ({ products }) => {
               >
                 Go back
               </button>
-              <button className="app-btn" onClick={() => handleAddToCart()}>
+              <button
+                className="app-btn"
+                onClick={() =>
+                  handleAddToCart({
+                    image: chosenItem.image,
+                    price: chosenItem.price,
+                  })
+                }
+              >
                 Add to cart
               </button>
             </div>
