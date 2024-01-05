@@ -4,8 +4,12 @@ import Home from "./pages/home/Home";
 import Plans from "./pages/plans/Plans";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cart from "./pages/cart/Cart";
+import { useContext } from "react";
+import { dataContext } from "./context/dataContext";
 
 function App() {
+  const { test } = useContext(dataContext);
+  console.log(`Data: ${test}`);
   return (
     <div className="App">
       <Routes>

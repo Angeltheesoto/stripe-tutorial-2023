@@ -6,7 +6,7 @@
 
 !TO DOS:
 1. Add google analytics
-2. Add Stripe
-3. Connect mongoDB and add quantity
-4.
+2. Connect to vercel
+3. Add Stripe
+4. Connect mongoDB and add quantity
  -->
