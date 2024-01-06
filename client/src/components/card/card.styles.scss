@@ -21,6 +21,17 @@
       width: 100%;
       border-radius: 10px;
     }
+
+    .card-sold-out {
+      position: absolute;
+      top: 10;
+      background-color: red;
+      color: white;
+      text-align: center;
+      font-weight: bolder;
+      border-radius: 50px;
+      width: 90%;
+    }
   }
 
   .card-item-container:hover {

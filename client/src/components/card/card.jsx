@@ -20,10 +20,16 @@ const Card = ({ products }) => {
     setChooseSize(false);
   };
 
+  // !WORKING HERE: Add a toast to tell the user that the size of the product they want to buy is sold out if the quantity is 0.
   const handleAddToCart = (item) => {
     let searchTitle = chosenItem.title;
     let searchSize = chosenSize;
     let itemExists = false;
+
+    // !HERE
+    if (item.quantity.searchSize === 0) {
+      console.log("This item is sold out!");
+    }
 
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].title === searchTitle && cart[i].size === searchSize) {
@@ -47,26 +53,57 @@ const Card = ({ products }) => {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     // console.log(itemExists);
+
+    // console.log(item.quantity.large);
   };
+
   // console.log(cart);
+  // console.log(`Card Component: ${products}`);
 
   return (
     <div className="card-container">
+      {/* Displays all products */}
       {!chooseSize &&
         products.map((item) => (
-          <div
-            className="card-item-container"
-            onClick={() => handleClick(item)}
-          >
-            <img src={item.image} alt="product one" className="card-image" />
-            <div>
-              <h2>{item.title}</h2>
-              <p>{item.desc}</p>
-            </div>
-            <button className="app-btn">Choose size</button>
+          <div>
+            {Object.values(item.quantity).reduce(
+              (acc, value) => acc + value,
+              0
+            ) > 0 ? (
+              <div
+                className="card-item-container"
+                onClick={() => handleClick(item)}
+              >
+                <img
+                  src={item.image}
+                  alt="product one"
+                  className="card-image"
+                />
+                <div>
+                  <h2>{item.title}</h2>
+                  <p>{item.desc}</p>
+                </div>
+                <button className="app-btn">Choose size</button>
+              </div>
+            ) : (
+              <div className="card-item-container">
+                <div className="card-sold-out">SOLD OUT</div>
+                <img
+                  src={item.image}
+                  alt="product one"
+                  className="card-image"
+                />
+                <div>
+                  <h2>{item.title}</h2>
+                  <p>{item.desc}</p>
+                </div>
+                <button className="app-btn">Choose size</button>
+              </div>
+            )}
           </div>
         ))}
 
+      {/* Displays chosen product */}
       {chooseSize && chosenItem !== "" ? (
         <div className="card-size-container">
           <img
@@ -80,6 +117,7 @@ const Card = ({ products }) => {
               <p>{chosenItem?.desc}</p>
               <span className="app-price">${chosenItem?.price}</span>
             </div>
+            {/* // !HERE */}
             <div className="card-size-btn-container">
               <p
                 className={
@@ -125,6 +163,7 @@ const Card = ({ products }) => {
                   handleAddToCart({
                     image: chosenItem.image,
                     price: chosenItem.price,
+                    quantity: chosenItem.quantity,
                   })
                 }
               >

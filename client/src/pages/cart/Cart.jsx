@@ -94,7 +94,7 @@ const Cart = () => {
           <h1>Cart</h1>
           {cart.length === 0 && <h5>Your cart is empty</h5>}
           {cart.map((item) => (
-            <div className="cart-item">
+            <div className="cart-item" key={item.title}>
               <img src={item.image} alt={item.title} className="me-5" />
               <div className="d-flex align-items-center justify-content-center flex-column">
                 <h2>{item.title}</h2>

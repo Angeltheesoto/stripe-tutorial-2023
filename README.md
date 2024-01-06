@@ -8,5 +8,11 @@
 1. Add google analytics
 2. Connect to vercel
 3. Add Stripe
-4. Connect mongoDB and add quantity
+
+https://i.postimg.cc/prBVcr2k/Cute-burger-shirt.jpg
+https://i.postimg.cc/LXppdSQW/Cute-burger-shirt-blk.jpg
+https://i.postimg.cc/T1kMWD28/Cute-pizza-shirt.jpg
+https://i.postimg.cc/k4vdqHkg/Cute-pizza-shirt-blk.jpg
+https://i.postimg.cc/2jTftPQH/Cute-taco-shirt.jpg
+https://i.postimg.cc/MHZJTDSb/Cute-taco-shirt-blk.jpg
  -->
