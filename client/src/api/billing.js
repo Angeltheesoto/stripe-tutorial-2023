@@ -3,7 +3,7 @@ var server_url = process.env.REACT_APP_SERVER_URL;
 
 export const createCheckout = async (userCredentials) => {
   let res = await axios.post(
-    `${server_url}/billing/create-checkout-session`,
+    `${server_url}billing/create-checkout-session`,
     userCredentials
   );
 

@@ -31,15 +31,17 @@ Pass:
     cancel_url
 }
 */
+
+// !WORKING HERE: SET UP ID FROM STRIPE AND CONNECT ITS ID WITH THE ID FROM THE PRODUCT IN MONGODB (LINE_ITEMS)
 router.post("/create-checkout-session", async (req, res) => {
   try {
     const { items, success_url, cancel_url } = req.body;
 
     const line_items = items.map((item) => ({
-      name: item.title,
-      images: [item.image],
       price: storeItems[item.id].price,
       quantity: item.quantity,
+      name: item.title,
+      images: [item.image],
       metadata: {
         size: item.size,
       },
@@ -57,7 +59,10 @@ router.post("/create-checkout-session", async (req, res) => {
       cancel_url: cancel_url,
     });
 
-    res.json({ url: session.url, sessionId: session.id });
+    // res.json({ url: session.url, sessionId: session.id });
+    res.json({ sessionId: session.id });
+
+    // res.json(line_items);
   } catch (err) {
     console.log("Create checkout sesssion error:", err);
     res.status(500).json({ err: `Create checkout session error: ${err}` });
