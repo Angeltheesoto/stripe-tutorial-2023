@@ -27,14 +27,18 @@ app.use(
 );
 
 // paths
+
+// pass as a function
 const productRoutes = require("./routes/products.js");
+
+// Dont pass as a function.
 const billingRoutes = require("./routes/billing.js");
 
 // routes
 app.get("/", (req, res) => {
   res.send("Server is live!");
 });
-app.use("/api/products", productRoutes);
+app.use("/api/products", productRoutes());
 app.use("/billing", billingRoutes);
 
 app.listen(PORT, () => {
