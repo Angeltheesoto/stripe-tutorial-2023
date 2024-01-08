@@ -8,7 +8,7 @@ import { dataContext } from "../../context/dataContext";
 
 const Home = () => {
   const { data } = useContext(dataContext);
-  // console.log(`Home component: ${data}`);
+  console.log(`Home component: ${data}`);
   return (
     <Layout>
       <Container>

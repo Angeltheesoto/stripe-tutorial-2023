@@ -3,11 +3,28 @@ import "./cart.styles.scss";
 import Layout from "../../components/shared/layout";
 import Container from "react-bootstrap/esm/Container";
 import { dataContext } from "../../context/dataContext";
-import { Plus, FileMinus, Trash } from "react-bootstrap-icons";
+import { Trash } from "react-bootstrap-icons";
+import { createCheckout } from "../../api/billing";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const { cart, setCart } = useContext(dataContext);
   const [total, setTotal] = useState(0);
+
+  const showToast = (msg, emitter) => {
+    if (emitter === "info") {
+      toast.info(msg);
+    } else if (emitter === "success") {
+      toast.success(msg);
+    } else if (emitter === "warning") {
+      toast.warn(msg);
+    } else if (emitter === "error") {
+      toast.error(msg);
+    } else {
+      toast(msg);
+    }
+  };
 
   const findItemIndex = (item) => {
     let searchTitle = item.title;
@@ -71,6 +88,24 @@ const Cart = () => {
     }
   };
 
+  const handleCheckout = () => {
+    try {
+      if (cart.length === 0 || !cart) {
+        showToast("You have no items in your cart.", "info");
+        return;
+      }
+      const client_url = process.env.REACT_APP_CLIENT_URL;
+      const userCredentials = {
+        items: cart,
+        success_url: `${client_url}success`,
+        cancel_url: `${client_url}cancel`,
+      };
+      createCheckout(userCredentials);
+    } catch {
+      console.error(`Could not create checkout session`);
+    }
+  };
+
   useEffect(() => {
     //   console.log(cart);
     const addTotalInCart = () => {
@@ -87,10 +122,23 @@ const Cart = () => {
     setTotal((prev) => (prev = myTotal));
   }, [cart]);
 
+  // console.log(cart);
+
   return (
     <Layout>
       <Container>
         <div className="cart-container">
+          <ToastContainer
+            position="top-center" // You can set the position here
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover={true}
+            theme="light"
+          />
           <h1>Cart</h1>
           {cart.length === 0 && <h5>Your cart is empty</h5>}
           {cart.map((item) => (
@@ -130,7 +178,9 @@ const Cart = () => {
             <h4>Total:</h4>
             <span className="cart-total">${total ? total : 0}</span>
           </div>
-          <button className="app-back-btn">Checkout</button>
+          <button className="app-back-btn" onClick={() => handleCheckout()}>
+            Checkout
+          </button>
         </div>
       </Container>
     </Layout>

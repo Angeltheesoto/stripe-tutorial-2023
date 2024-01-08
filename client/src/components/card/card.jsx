@@ -2,12 +2,29 @@ import React, { useContext, useState } from "react";
 import "./card.styles.scss";
 import { dataContext } from "../../context/dataContext";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Card = ({ products }) => {
   const { cart, setCart } = useContext(dataContext);
 
   const [chooseSize, setChooseSize] = useState(false);
   const [chosenItem, setChosenItem] = useState("");
   const [chosenSize, setChosenSize] = useState("small");
+
+  const showToast = (msg, emitter) => {
+    if (emitter === "info") {
+      toast.info(msg);
+    } else if (emitter === "success") {
+      toast.success(msg);
+    } else if (emitter === "warning") {
+      toast.warn(msg);
+    } else if (emitter === "error") {
+      toast.error(msg);
+    } else {
+      toast(msg);
+    }
+  };
 
   const handleClick = (item) => {
     // console.log(`Product: ${item.image}`);
@@ -20,16 +37,20 @@ const Card = ({ products }) => {
     setChooseSize(false);
   };
 
-  // !WORKING HERE: Add a toast to tell the user that the size of the product they want to buy is sold out if the quantity is 0.
   const handleAddToCart = (item) => {
     let searchTitle = chosenItem.title;
     let searchSize = chosenSize;
     let itemExists = false;
 
-    // !HERE
-    if (item.quantity.searchSize === 0) {
-      console.log("This item is sold out!");
+    if (item.quantity[chosenSize] === 0) {
+      showToast("This size is sold out", "info");
+      return;
     }
+    // else {
+    // console.log(
+    //   `This item is not sold out! Total ${chosenSize}: ${item.quantity[chosenSize]}`
+    // );
+    // }
 
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].title === searchTitle && cart[i].size === searchSize) {
@@ -43,6 +64,7 @@ const Card = ({ products }) => {
       setCart((prev) => [
         ...prev,
         {
+          id: item.id,
           title: searchTitle,
           size: searchSize,
           quantity: 1,
@@ -51,10 +73,9 @@ const Card = ({ products }) => {
         },
       ]);
     }
+    showToast(`Added ${searchTitle} to cart`, "success");
     localStorage.setItem("cart", JSON.stringify(cart));
-    // console.log(itemExists);
-
-    // console.log(item.quantity.large);
+    console.log(itemExists);
   };
 
   // console.log(cart);
@@ -105,7 +126,19 @@ const Card = ({ products }) => {
 
       {/* Displays chosen product */}
       {chooseSize && chosenItem !== "" ? (
-        <div className="card-size-container">
+        <div className="card-size-container" key={chosenItem.title}>
+          <ToastContainer
+            position="top-center" // You can set the position here
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover={true}
+            theme="light"
+          />
+
           <img
             src={chosenItem?.image}
             alt="product one"
@@ -117,7 +150,6 @@ const Card = ({ products }) => {
               <p>{chosenItem?.desc}</p>
               <span className="app-price">${chosenItem?.price}</span>
             </div>
-            {/* // !HERE */}
             <div className="card-size-btn-container">
               <p
                 className={
@@ -128,6 +160,7 @@ const Card = ({ products }) => {
                 onClick={() => setChosenSize("small")}
               >
                 Small
+                {/* {chosenItem.quantity["small"] === 0 && "sold out"} */}
               </p>
               <p
                 className={
@@ -164,6 +197,7 @@ const Card = ({ products }) => {
                     image: chosenItem.image,
                     price: chosenItem.price,
                     quantity: chosenItem.quantity,
+                    id: chosenItem._id,
                   })
                 }
               >

@@ -4,7 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db.js");
 
 require("dotenv").config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const allowedOrigins = ["http://localhost:3000"];
 
 connectDB();
@@ -28,12 +28,14 @@ app.use(
 
 // paths
 const productRoutes = require("./routes/products.js");
+const billingRoutes = require("./routes/billing.js");
 
 // routes
 app.get("/", (req, res) => {
   res.send("Server is live!");
 });
-app.use("/api/products", productRoutes());
+app.use("/api/products", productRoutes);
+app.use("/billing", billingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Listening on PORT: ${PORT}`);

@@ -5,9 +5,9 @@
 1.
 
 !TO DOS:
-1. Add google analytics
+1. Add Stripe
 2. Connect to vercel
-3. Add Stripe
+3. Add google analytics
 
 https://i.postimg.cc/prBVcr2k/Cute-burger-shirt.jpg
 https://i.postimg.cc/LXppdSQW/Cute-burger-shirt-blk.jpg
